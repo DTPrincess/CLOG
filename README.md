@@ -3,5 +3,4 @@
 CLOSET + LOG  
 BY DTPrincess
 
-hihi
-hihihih
+DTPrincess are CUTE!
