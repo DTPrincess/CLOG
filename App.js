@@ -4,15 +4,17 @@ import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 import List from "./screens/List";
 import Start from "./screens/Start";
+import Home from "./screens/Home";
 
 export default function App() {
   const Stack = createStackNavigator();
   
   return (
     <NavigationContainer>
-      <Stack.Navigator initialRouteName='Start' screenOptions = {{ headerShown: false }}>
+      <Stack.Navigator initialRouteName='Home' screenOptions = {{ headerShown: false }}>
         <Stack.Screen name='Start' component={Start} />
         <Stack.Screen name='List' component={List} />
+        <Stack.Screen name='Home' component={Home} />
       </Stack.Navigator>
     </NavigationContainer>
   );
