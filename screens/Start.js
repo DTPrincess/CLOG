@@ -19,7 +19,7 @@ export default function Start({ navigation }) {
       </View>
 
       <TouchableOpacity
-        onPress={() => navigation.navigate("List")}
+        onPress={() => navigation.navigate("Home")}
         style={styles.footer}
       >
         <Text style={styles.login}>게스트 로그인</Text>
