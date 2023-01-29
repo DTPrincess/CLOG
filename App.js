@@ -5,6 +5,7 @@ import { createStackNavigator } from "@react-navigation/stack";
 import List from "./screens/List";
 import Start from "./screens/Start";
 import Home from "./screens/Home";
+import Add from "./screens/Add";
 
 export default function App() {
   const Stack = createStackNavigator();
@@ -15,6 +16,7 @@ export default function App() {
         <Stack.Screen name='Start' component={Start} />
         <Stack.Screen name='List' component={List} />
         <Stack.Screen name='Home' component={Home} />
+        <Stack.Screen name='Add' component={Add} />
       </Stack.Navigator>
     </NavigationContainer>
   );

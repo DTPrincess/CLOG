@@ -9,7 +9,7 @@ import {
 } from "react-native";
 import { AntDesign } from "@expo/vector-icons";
 
-export default function List() {
+export default function List({navigation}) {
   const [clothes, setClothes] = useState([
     "니트 조끼",
     "배색 후드집업",
@@ -35,7 +35,10 @@ export default function List() {
         ))}
       </ScrollView>
 
-      <TouchableOpacity style={styles.plus}>
+      <TouchableOpacity 
+        onPress={() => navigation.navigate("Add")}
+        style={styles.plus}
+        >
         <AntDesign name="pluscircle" size={60} color="white" />
       </TouchableOpacity>
     </View>
