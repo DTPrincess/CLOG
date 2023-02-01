@@ -1,88 +1,88 @@
 import { StatusBar } from "expo-status-bar";
-import React from "react";
+import React, { useState } from "react";
 import { View, Text, TouchableOpacity, StyleSheet } from "react-native";
 import { AntDesign } from "@expo/vector-icons";
+import { Ionicons } from '@expo/vector-icons';
 
 export default function Home({ navigation }) {
+  const [clothes, setClothes] = useState(["Top", "Bottom", "Outer", "Acc"]);
   return (
     <View style={styles.container}>
       <StatusBar style="light" />
 
       <View style={styles.header}>
-        <TouchableOpacity style={styles.notification}>
+        <TouchableOpacity>
           <AntDesign name="notification" size={40} color="white" />
         </TouchableOpacity>
 
-        <TouchableOpacity style={styles.mypage}>
-          <AntDesign name="meh" size={40} color="white" />
+        <TouchableOpacity>
+        <Ionicons name="person" size={40} color="white" />
         </TouchableOpacity>
       </View>
 
       <View style={styles.body}>
-        <Text style={styles.season}>Spring </Text>
-        <TouchableOpacity onPress={() => navigation.navigate("List")}>
-          <Text style={styles.list}>Top</Text>
-        </TouchableOpacity>
-        <TouchableOpacity onPress={() => navigation.navigate("List")}>
-          <Text style={styles.list}>Bottom</Text>
-        </TouchableOpacity>
-        <TouchableOpacity onPress={() => navigation.navigate("List")}>
-          <Text style={styles.list}>Outer</Text>
-        </TouchableOpacity>
-        <TouchableOpacity onPress={() => navigation.navigate("List")}>
-          <Text style={styles.list}>Acc</Text>
-        </TouchableOpacity>
+        <View style={styles.season2}>
+          <Text style={styles.season}>Spring </Text>
 
-        <Text style={styles.season}>Summer</Text>
-        <TouchableOpacity onPress={() => navigation.navigate("List")}>
-          <Text style={styles.list}>Top</Text>
-        </TouchableOpacity>
-        <TouchableOpacity onPress={() => navigation.navigate("List")}>
-          <Text style={styles.list}>Bottom</Text>
-        </TouchableOpacity>
-        <TouchableOpacity onPress={() => navigation.navigate("List")}>
-          <Text style={styles.list}>Outer</Text>
-        </TouchableOpacity>
-        <TouchableOpacity onPress={() => navigation.navigate("List")}>
-          <Text style={styles.list}>Acc</Text>
-        </TouchableOpacity>
+          {clothes.map((value, key) => (
+            <TouchableOpacity
+              onPress={() => navigation.navigate("List")}
+              style={styles.list}
+              key={key}
+            >
+              <Text style={styles.list}>{value}</Text>
+            </TouchableOpacity>
+          ))}
+        </View>
 
-        <Text style={styles.season}>Fall</Text>
-        <TouchableOpacity onPress={() => navigation.navigate("List")}>
-          <Text style={styles.list}>Top</Text>
-        </TouchableOpacity>
-        <TouchableOpacity onPress={() => navigation.navigate("List")}>
-          <Text style={styles.list}>Bottom</Text>
-        </TouchableOpacity>
-        <TouchableOpacity onPress={() => navigation.navigate("List")}>
-          <Text style={styles.list}>Outer</Text>
-        </TouchableOpacity>
-        <TouchableOpacity onPress={() => navigation.navigate("List")}>
-          <Text style={styles.list}>Acc</Text>
-        </TouchableOpacity>
+        <View style={styles.season2}>
+          <Text style={styles.season}>Summer</Text>
+          {clothes.map((value, key) => (
+            <TouchableOpacity
+              onPress={() => navigation.navigate("List")}
+              style={styles.list}
+              key={key}
+            >
+              <Text style={styles.list}>{value}</Text>
+            </TouchableOpacity>
+          ))}
+        </View>
 
-        <Text style={styles.season}>Winter</Text>
-        <TouchableOpacity onPress={() => navigation.navigate("List")}>
-          <Text style={styles.list}>Top</Text>
-        </TouchableOpacity>
-        <TouchableOpacity onPress={() => navigation.navigate("List")}>
-          <Text style={styles.list}>Bottom</Text>
-        </TouchableOpacity>
-        <TouchableOpacity onPress={() => navigation.navigate("List")}>
-          <Text style={styles.list}>Outer</Text>
-        </TouchableOpacity>
-        <TouchableOpacity onPress={() => navigation.navigate("List")}>
-          <Text style={styles.list}>Acc</Text>
-        </TouchableOpacity>
+        <View style={styles.season2}>
+          <Text style={styles.season}>Fall</Text>
+          {clothes.map((value, key) => (
+            <TouchableOpacity
+              onPress={() => navigation.navigate("List")}
+              style={styles.list}
+              key={key}
+            >
+              <Text style={styles.list}>{value}</Text>
+            </TouchableOpacity>
+          ))}
+        </View>
+
+        <View style={styles.season2}>
+          <Text style={styles.season}>Winter</Text>
+          {clothes.map((value, key) => (
+            <TouchableOpacity
+              onPress={() => navigation.navigate("List")}
+              style={styles.list}
+              key={key}
+            >
+              <Text style={styles.list}>{value}</Text>
+            </TouchableOpacity>
+          ))}
+        </View>
+</View>
+        <View style={styles.footer}>
+          <TouchableOpacity
+            style={styles.plus}
+            onPress={() => navigation.navigate("List")}
+          >
+            <AntDesign name="pluscircle" size={70} color="white" />
+          </TouchableOpacity>
+        </View>
       </View>
-
-      <TouchableOpacity
-        style={styles.plus}
-        onPress={() => navigation.navigate("List")}
-      >
-        <AntDesign name="pluscircle" size={60} color="white" />
-      </TouchableOpacity>
-    </View>
   );
 }
 
@@ -94,42 +94,49 @@ const styles = StyleSheet.create({
 
   header: {
     paddingTop: 50,
+    paddingLeft:280,
     backgroundColor: "black",
-  },
-
-  notification: {
-    paddingLeft: 250,
-  },
-
-  mypage: {
-    paddingLeft: 290,
+    flexDirection: "row",
+    justifyContent:'space-between',
   },
 
   body: {
-    paddingTop: 10,
-    paddingBottom: 80,
     backgroundColor: "black",
+    alignItems: "center",
+    flexDirection: "row",
+    flexWrap: "wrap",
+    marginHorizontal: 20,
+    marginTop:60,
+    justifyContent:'space-evenly',
+  },
+
+  season2: {
+    flexDirection: "column",
+
   },
 
   season: {
-    fontSize: 30,
-    fontWeight: "600",
+    fontSize: 50,
+    fontWeight: "500",
     float: "left",
     color: "white",
   },
 
   list: {
-    fontSize: 20,
-    fontWeight: "500",
+    fontSize: 40,
+    fontWeight: "350",
     color: "white",
   },
 
+  footer: {
+    marginTop:90,
+    paddingLeft:150,
+    backgroundColor: "black",
+
+  },
+
   plus: {
-    backgroundcolor: "white",
     borderRadius: 60,
-    paddingHorizontal: 15,
-    paddingVertical: 15,
-    marginBottom: 40,
-    alignItems: "center",
+    justifyContent:'center',
   },
 });
