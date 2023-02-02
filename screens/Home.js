@@ -21,8 +21,12 @@ export default function Home({ navigation }) {
       </View>
 
       <View style={styles.body}>
+
+        
         <View style={styles.season2}>
+        <View style={styles.body2}>
           <Text style={styles.season}>Spring </Text>
+          </View>
 
           {clothes.map((value, key) => (
             <TouchableOpacity
@@ -33,10 +37,13 @@ export default function Home({ navigation }) {
               <Text style={styles.list}>{value}</Text>
             </TouchableOpacity>
           ))}
-        </View>
+       </View>
 
         <View style={styles.season2}>
+        <View style={styles.body2}>
           <Text style={styles.season}>Summer</Text>
+          </View>
+
           {clothes.map((value, key) => (
             <TouchableOpacity
               onPress={() => navigation.navigate("List")}
@@ -49,7 +56,9 @@ export default function Home({ navigation }) {
         </View>
 
         <View style={styles.season2}>
+        <View style={styles.body2}>
           <Text style={styles.season}>Fall</Text>
+          </View>
           {clothes.map((value, key) => (
             <TouchableOpacity
               onPress={() => navigation.navigate("List")}
@@ -62,7 +71,9 @@ export default function Home({ navigation }) {
         </View>
 
         <View style={styles.season2}>
+        <View style={styles.body2}>
           <Text style={styles.season}>Winter</Text>
+          </View>
           {clothes.map((value, key) => (
             <TouchableOpacity
               onPress={() => navigation.navigate("List")}
@@ -110,20 +121,24 @@ const styles = StyleSheet.create({
     justifyContent:'space-evenly',
   },
 
+body2:{
+paddingTop:20,
+    paddingBottom:20,
+
+},
   season2: {
     flexDirection: "column",
-
   },
 
   season: {
-    fontSize: 50,
-    fontWeight: "500",
+    fontSize: 40,
+    fontWeight: "600",
     float: "left",
     color: "white",
   },
 
   list: {
-    fontSize: 40,
+    fontSize: 35,
     fontWeight: "350",
     color: "white",
   },
