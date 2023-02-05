@@ -12,7 +12,7 @@ export default function Home({ navigation }) {
     <View style={styles.container}>
       <StatusBar style="light" />
 
-      <View style={styles.header}>
+      <View style={styles.menubar}>
         <TouchableOpacity style={styles.notification}>
           <Ionicons name="notifications" size={35} color="white" />
         </TouchableOpacity>
@@ -83,7 +83,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
 
-  header: {
+  menubar: {
     justifyContent: "flex-end",
     flexDirection: "row",
     width: "100%",
