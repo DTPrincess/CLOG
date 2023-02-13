@@ -2,7 +2,7 @@ import { StatusBar } from "expo-status-bar";
 import React, { useState } from "react";
 import { View, Text, TouchableOpacity, StyleSheet } from "react-native";
 import { AntDesign } from "@expo/vector-icons";
-import { Ionicons } from '@expo/vector-icons';
+import { Ionicons } from "@expo/vector-icons";
 
 export default function Home({ navigation }) {
   const [clothes, setClothes] = useState(["Top", "Bottom", "Outer", "Acc"]);
@@ -15,33 +15,15 @@ export default function Home({ navigation }) {
           <AntDesign name="notification" size={40} color="white" />
         </TouchableOpacity>
 
-        <TouchableOpacity>
-        <Ionicons name="person" size={40} color="white" />
+        <TouchableOpacity  onPress={() => navigation.navigate("Info")}>
+          <Ionicons name="person" size={40} color="white" />
         </TouchableOpacity>
       </View>
 
       <View style={styles.body}>
-
-        
         <View style={styles.season2}>
-        <View style={styles.body2}>
-          <Text style={styles.season}>Spring </Text>
-          </View>
-
-          {clothes.map((value, key) => (
-            <TouchableOpacity
-              onPress={() => navigation.navigate("List")}
-              style={styles.list}
-              key={key}
-            >
-              <Text style={styles.list}>{value}</Text>
-            </TouchableOpacity>
-          ))}
-       </View>
-
-        <View style={styles.season2}>
-        <View style={styles.body2}>
-          <Text style={styles.season}>Summer</Text>
+          <View style={styles.body2}>
+            <Text style={styles.season}>Spring </Text>
           </View>
 
           {clothes.map((value, key) => (
@@ -56,8 +38,24 @@ export default function Home({ navigation }) {
         </View>
 
         <View style={styles.season2}>
-        <View style={styles.body2}>
-          <Text style={styles.season}>Fall</Text>
+          <View style={styles.body2}>
+            <Text style={styles.season}>Summer</Text>
+          </View>
+
+          {clothes.map((value, key) => (
+            <TouchableOpacity
+              onPress={() => navigation.navigate("List")}
+              style={styles.list}
+              key={key}
+            >
+              <Text style={styles.list}>{value}</Text>
+            </TouchableOpacity>
+          ))}
+        </View>
+
+        <View style={styles.season2}>
+          <View style={styles.body2}>
+            <Text style={styles.season}>Fall</Text>
           </View>
           {clothes.map((value, key) => (
             <TouchableOpacity
@@ -71,8 +69,8 @@ export default function Home({ navigation }) {
         </View>
 
         <View style={styles.season2}>
-        <View style={styles.body2}>
-          <Text style={styles.season}>Winter</Text>
+          <View style={styles.body2}>
+            <Text style={styles.season}>Winter</Text>
           </View>
           {clothes.map((value, key) => (
             <TouchableOpacity
@@ -83,17 +81,17 @@ export default function Home({ navigation }) {
               <Text style={styles.list}>{value}</Text>
             </TouchableOpacity>
           ))}
-        </View>
-</View>
-        <View style={styles.footer}>
-          <TouchableOpacity
-            style={styles.plus}
-            onPress={() => navigation.navigate("List")}
-          >
-            <AntDesign name="pluscircle" size={70} color="white" />
-          </TouchableOpacity>
         </View>
       </View>
+      <View style={styles.footer}>
+        <TouchableOpacity
+          style={styles.plus}
+          onPress={() => navigation.navigate("List")}
+        >
+          <AntDesign name="pluscircle" size={70} color="white" />
+        </TouchableOpacity>
+      </View>
+    </View>
   );
 }
 
@@ -105,10 +103,10 @@ const styles = StyleSheet.create({
 
   header: {
     paddingTop: 50,
-    paddingLeft:280,
+    paddingLeft: 280,
     backgroundColor: "black",
     flexDirection: "row",
-    justifyContent:'space-between',
+    justifyContent: "space-between",
   },
 
   body: {
@@ -117,15 +115,14 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     flexWrap: "wrap",
     marginHorizontal: 20,
-    marginTop:60,
-    justifyContent:'space-evenly',
+    marginTop: 60,
+    justifyContent: "space-evenly",
   },
 
-body2:{
-paddingTop:20,
-    paddingBottom:20,
-
-},
+  body2: {
+    paddingTop: 20,
+    paddingBottom: 20,
+  },
   season2: {
     flexDirection: "column",
   },
@@ -144,14 +141,13 @@ paddingTop:20,
   },
 
   footer: {
-    marginTop:90,
-    paddingLeft:150,
+    marginTop: 90,
+    paddingLeft: 150,
     backgroundColor: "black",
-
   },
 
   plus: {
     borderRadius: 60,
-    justifyContent:'center',
+    justifyContent: "center",
   },
 });
