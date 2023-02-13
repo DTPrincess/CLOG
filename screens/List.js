@@ -8,8 +8,10 @@ import {
   TouchableOpacity,
 } from "react-native";
 import { AntDesign } from "@expo/vector-icons";
+import { Ionicons } from "@expo/vector-icons";
+import { FontAwesome } from "@expo/vector-icons";
 
-export default function List({navigation}) {
+export default function List({ navigation }) {
   const [clothes, setClothes] = useState([
     "니트 조끼",
     "배색 후드집업",
@@ -21,6 +23,16 @@ export default function List({navigation}) {
   return (
     <View style={styles.container}>
       <StatusBar style="light" />
+
+      <View style={styles.menubar}>
+        <TouchableOpacity style={styles.notification}>
+          <Ionicons name="notifications" size={35} color="white" />
+        </TouchableOpacity>
+
+        <TouchableOpacity style={styles.user}>
+          <FontAwesome name="user-circle-o" size={35} color="white" />
+        </TouchableOpacity>
+      </View>
 
       <View style={styles.header}>
         <Text style={styles.season}>Winter</Text>
@@ -35,10 +47,10 @@ export default function List({navigation}) {
         ))}
       </ScrollView>
 
-      <TouchableOpacity 
+      <TouchableOpacity
         onPress={() => navigation.navigate("Add")}
         style={styles.plus}
-        >
+      >
         <AntDesign name="pluscircle" size={60} color="white" />
       </TouchableOpacity>
     </View>
@@ -50,8 +62,21 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: "black",
   },
-  header: {
+  menubar: {
+    justifyContent: "flex-end",
+    flexDirection: "row",
+    width: "100%",
     marginTop: 60,
+    paddingRight: 15,
+  },
+  notification: {
+    paddingHorizontal: 3,
+  },
+
+  user: {
+    paddingHorizontal: 3,
+  },
+  header: {
     marginBottom: 15,
     paddingLeft: 15,
   },
