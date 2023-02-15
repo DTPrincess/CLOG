@@ -12,16 +12,28 @@ import BouncyCheckbox from "react-native-bouncy-checkbox";
 import { AntDesign } from "@expo/vector-icons";
 import { Ionicons } from "@expo/vector-icons";
 import { FontAwesome } from "@expo/vector-icons";
+import { Entypo } from "@expo/vector-icons";
 
 export default function Add({ navigation }) {
+
     return (
         <View style={styles.container}>
-            <View style={styles.menubar}>
+            <View style={styles.menuBar}>
+                <TouchableOpacity
+                    onPress={() => navigation.navigate("Home")}
+                    style={styles.home}
+                >
+                    <Entypo name="home" size={35} color="white" />
+                </TouchableOpacity>
+
                 <TouchableOpacity style={styles.notification}>
                     <Ionicons name="notifications" size={35} color="white" />
                 </TouchableOpacity>
 
-                <TouchableOpacity style={styles.user}>
+                <TouchableOpacity
+                    onPress={() => navigation.navigate("Info")}
+                    style={styles.user}
+                >
                     <FontAwesome name="user-circle-o" size={35} color="white" />
                 </TouchableOpacity>
             </View>
@@ -45,16 +57,16 @@ export default function Add({ navigation }) {
                                 onPress={() => { }}
                                 fillColor="white"
                                 unfillColor="black"
-                                text ="Spring"
+                                text="Spring"
                                 textStyle={{
                                     textDecorationLine: "none",
                                 }}
                             />
-                        <BouncyCheckbox
+                            <BouncyCheckbox
                                 onPress={() => { }}
                                 fillColor="white"
                                 unfillColor="black"
-                                text ="Summer"
+                                text="Summer"
                                 textStyle={{
                                     textDecorationLine: "none",
                                 }}
@@ -66,21 +78,21 @@ export default function Add({ navigation }) {
                                 onPress={() => { }}
                                 fillColor="white"
                                 unfillColor="black"
-                                text ="Fall"
+                                text="Fall"
                                 textStyle={{
                                     textDecorationLine: "none",
                                 }}
                             />
-                        <BouncyCheckbox
-                                
+                            <BouncyCheckbox
+
                                 fillColor="white"
                                 unfillColor="black"
-                                text ="Winter"
+                                text="Winter"
                                 textStyle={{
                                     textDecorationLine: "none",
                                 }}
                             />
-                        
+
                         </View>
                         <View style={styles.category}>
                             <Text style={styles.categoryText}>Category</Text>
@@ -88,7 +100,7 @@ export default function Add({ navigation }) {
                                 placeholder={"추후 checkbox로 변경"}
                                 style={styles.textinput}
                             />
-                    
+
                         </View>
 
                         <View style={styles.category}>
@@ -135,12 +147,17 @@ const styles = StyleSheet.create({
         backgroundColor: "black",
     },
 
-    menubar: {
-        justifyContent: "flex-end",
+    menuBar: {
+        //justifyContent: "flex-end",
         flexDirection: "row",
         width: "100%",
         marginTop: 60,
-        paddingRight: 15,
+        paddingHorizontal: 15,
+    },
+
+    home: {
+        flex: 1,
+        paddingHorizontal: 3,
     },
 
     notification: {
