@@ -1,24 +1,29 @@
 import { StatusBar } from "expo-status-bar";
 import React from "react";
-import { View, Text, TouchableOpacity, StyleSheet } from "react-native";
+import {
+  FlatList,
+  View,
+  Text,
+  TouchableOpacity,
+  StyleSheet,
+} from "react-native";
 import { AntDesign } from "@expo/vector-icons";
-
-
 
 export default function Home({ navigation }) {
   return (
     <View style={styles.container}>
       <StatusBar style="light" />
+      <View style={styles.mypage}>
+        <Text style={styles.title}> CLOG</Text>
+        <Text style={styles.title1}> MYPAGE</Text>
+      </View>
       <View style={styles.header}>
         <TouchableOpacity onPress={() => navigation.navigate("Home")}>
           <AntDesign name="home" size={45} color="white" />
         </TouchableOpacity>
-
-        <View stle={styles.mypage}>
-          <Text style={styles.title}> CLOG</Text>
-          <Text style={styles.title1}> MYPAGE</Text>
-        </View>
       </View>
+
+
       <View style={styles.body}>
         <View style={styles.pic}>
           <TouchableOpacity>
@@ -30,8 +35,11 @@ export default function Home({ navigation }) {
           <Text style={styles.email}>E-mail</Text>
         </View>
       </View>
+
       <View style={styles.footer}>
-        <Text style={styles.line}> --------------------------</Text>
+        <FlatList
+          ItemSeparatorComponent={() => <View style={styles.separator} />}
+        />
         <Text style={styles.heart}> My ♥</Text>
         <Text style={styles.list}> 내 게시물</Text>
         <Text style={styles.codi}> 코디</Text>
@@ -46,24 +54,30 @@ const styles = StyleSheet.create({
     backgroundColor: "black",
   },
 
+  mypage:{
+    marginTop: 50,
+
+
+  },
   header: {
-    paddingTop: 60,
-    paddingLeft: 15,
-    backgroundColor: "black",
+
+    paddingLeft: 28,
+
     flexDirection: "row",
     color: "white",
   },
 
-
   title: {
-    paddingLeft: 228,
+    paddingLeft: 20,
     flexDirection: "row",
     color: "white",
     fontSize: 25,
     fontWeight: "700",
   },
+
   title1: {
-    paddingLeft: 210,
+
+    paddingLeft: 8,
     flexDirection: "row",
     color: "white",
     fontSize: 25,
@@ -73,6 +87,7 @@ const styles = StyleSheet.create({
   body: {
     flexDirection: "row",
   },
+
   pic: {
     marginTop: 60,
     marginLeft: 10,
@@ -101,32 +116,33 @@ const styles = StyleSheet.create({
   },
 
   footer: {
-    marginTop: 35,
-    height:230,
-    justifyContent:"space-between",
-
+    height: 250,
+    justifyContent: "space-between",
   },
 
-  line:{
-    color: "white",
-    fontweight: 700,
-    fontSize: 35,
+  line: {
+    flex: 1,
   },
   heart: {
     color: "white",
-    fontweight: 700,
-    fontSize: 35,
+    fontWeight: "800",
+    fontSize: 25,
   },
 
   list: {
     color: "white",
-    fontweight: 700,
-    fontSize: 35,
+    fontWeight: "900",
+    fontSize: 25,
   },
 
- codi: {
+  codi: {
     color: "white",
-    fontweight: 700,
-    fontSize: 35,
+    fontWeight: "900",
+    fontSize: 25,
+  },
+
+  separator: {
+    Color: "white",
+    height: 10,
   },
 });
