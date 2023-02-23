@@ -18,6 +18,15 @@ import { FontAwesome } from "@expo/vector-icons";
 import { Entypo } from "@expo/vector-icons";
 
 export default function Add({ navigation }) {
+  //추가할 옷 데이터↓↓ (date, wear 추후에 구현 예정)
+  const [data, setData] = useState({
+    season: "",
+    category: "",
+    name: "",
+    brand: "",
+    price: 0,
+  });
+
   const checkboxStyles = {
     fillColor: "white",
     unfillColor: "black",
@@ -28,7 +37,7 @@ export default function Add({ navigation }) {
     paddingBottom: 7,
   };
 
-  const [seasons] = useState([
+  const seasons = [
     {
       id: 0,
       text: "Spring",
@@ -49,9 +58,9 @@ export default function Add({ navigation }) {
       text: "Winter",
       ...checkboxStyles,
     },
-  ]);
+  ];
 
-  const [clothes] = useState([
+  const clothes = [
     {
       id: 0,
       text: "Top",
@@ -72,7 +81,7 @@ export default function Add({ navigation }) {
       text: "Acc",
       ...checkboxStyles,
     },
-  ]);
+  ];
 
   return (
     <View style={styles.container}>
@@ -254,7 +263,7 @@ const styles = StyleSheet.create({
     fontSize: 16,
     borderBottomColor: "white",
     borderWidth: 2,
-    width: 220,
+    width: "70%",
     paddingBottom: 5,
     paddingHorizontal: 5,
   },
@@ -266,7 +275,7 @@ const styles = StyleSheet.create({
   },
 
   checkbox: {
-    width: 220,
+    width: "70%",
     flexWrap: "wrap",
   },
 });

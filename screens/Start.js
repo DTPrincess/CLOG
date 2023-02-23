@@ -15,7 +15,7 @@ export default function Start({ navigation }) {
 
       <View style={styles.body}>
         <Text style={styles.title}>CLOG</Text>
-        <Text style={styles.subtitle}>나만의 옷장 기록</Text>
+        <Text style={styles.subtitle}>🩳 나만의 옷장 기록 🧤</Text>
       </View>
 
       <TouchableOpacity
@@ -44,10 +44,11 @@ const styles = StyleSheet.create({
     color: "white",
     fontSize: 48,
     fontWeight: "600",
+    //fontStyle: "italic",
   },
   subtitle: {
     color: "white",
-    fontWeight: "500",
+    paddingBottom: 5,
   },
   footer: {
     backgroundColor: "white",
