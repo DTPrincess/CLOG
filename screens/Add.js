@@ -154,7 +154,7 @@ export default function Add({ navigation }) {
                 fillColor="white"
                 unfillColor="black"
                 style={{
-                  flex: 1,
+                  width: "65%",
                   marginLeft: 15,
                 }}
                 disableText
@@ -263,7 +263,7 @@ const styles = StyleSheet.create({
     fontSize: 16,
     borderBottomColor: "white",
     borderWidth: 2,
-    width: "70%",
+    width: "65%",
     paddingBottom: 5,
     paddingHorizontal: 5,
   },
@@ -275,7 +275,7 @@ const styles = StyleSheet.create({
   },
 
   checkbox: {
-    width: "70%",
+    width: "65%",
     flexWrap: "wrap",
   },
 });
