@@ -18,50 +18,36 @@ import { FontAwesome } from "@expo/vector-icons";
 import { Entypo } from "@expo/vector-icons";
 
 export default function Add({ navigation }) {
+  const checkboxStyles = {
+    fillColor: "white",
+    unfillColor: "black",
+    textStyle: {
+      textDecorationLine: "none",
+    },
+    width: "50%",
+    paddingBottom: 7,
+  };
+
   const [seasons] = useState([
     {
       id: 0,
       text: "Spring",
-      fillColor: "white",
-      unfillColor: "black",
-      textStyle: {
-        textDecorationLine: "none",
-      },
-      width: "50%",
-      paddingBottom: 5,
+      ...checkboxStyles,
     },
     {
       id: 1,
       text: "Summer",
-      fillColor: "white",
-      unfillColor: "black",
-      textStyle: {
-        textDecorationLine: "none",
-      },
-      width: "50%",
-      paddingBottom: 5,
+      ...checkboxStyles,
     },
     {
       id: 2,
       text: "Fall",
-      fillColor: "white",
-      unfillColor: "black",
-      textStyle: {
-        textDecorationLine: "none",
-      },
-      width: "50%",
-      paddingBottom: 5,
+      ...checkboxStyles,
     },
     {
       id: 3,
       text: "Winter",
-      fillColor: "white",
-      unfillColor: "black",
-      textStyle: {
-        textDecorationLine: "none",
-      },
-      width: "50%",
-      paddingBottom: 5,
+      ...checkboxStyles,
     },
   ]);
 
@@ -69,46 +55,22 @@ export default function Add({ navigation }) {
     {
       id: 0,
       text: "Top",
-      fillColor: "white",
-      unfillColor: "black",
-      textStyle: {
-        textDecorationLine: "none",
-      },
-      width: "50%",
-      paddingBottom: 5,
+      ...checkboxStyles,
     },
     {
       id: 1,
       text: "Bottom",
-      fillColor: "white",
-      unfillColor: "black",
-      textStyle: {
-        textDecorationLine: "none",
-      },
-      width: "50%",
-      paddingBottom: 5,
+      ...checkboxStyles,
     },
     {
       id: 2,
       text: "Outer",
-      fillColor: "white",
-      unfillColor: "black",
-      textStyle: {
-        textDecorationLine: "none",
-      },
-      width: "50%",
-      paddingBottom: 5,
+      ...checkboxStyles,
     },
     {
       id: 3,
       text: "Acc",
-      fillColor: "white",
-      unfillColor: "black",
-      textStyle: {
-        textDecorationLine: "none",
-      },
-      width: "50%",
-      paddingBottom: 5,
+      ...checkboxStyles,
     },
   ]);
 
@@ -202,7 +164,7 @@ export default function Add({ navigation }) {
         </View>
 
         <TouchableOpacity style={styles.plus}>
-          <AntDesign name="pluscircle" size={60} color="white" />
+          <Ionicons name="checkmark-circle" size={75} color="white" />
         </TouchableOpacity>
       </ScrollView>
     </View>
