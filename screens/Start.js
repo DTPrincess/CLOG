@@ -1,6 +1,7 @@
 import { StatusBar } from "expo-status-bar";
 import React, { useState } from "react";
 import title from '../assets/title.png';
+import start from '../assets/start.png';
 import {
   StyleSheet,
   Text,
@@ -15,14 +16,13 @@ export default function Start({ navigation }) {
       <StatusBar style="light" />
 
       <View style={styles.body}>
-        <Image style={styles.image} source={title} />
+        <Image style={styles.title} source={title} />
       </View>
 
       <TouchableOpacity
         onPress={() => navigation.navigate("Home")}
-        style={styles.footer}
       >
-        <Text style={styles.login}>시작하기</Text>
+        <Image style={styles.start} source={start} />
       </TouchableOpacity>
     </View>
   );
@@ -41,17 +41,16 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
 
-  image: {
-    height: 220,
-    width: 220,
+  title: {
+    height: 250,
+    width: 250,
   },
 
-  footer: {
-    backgroundColor: "white",
-    borderRadius: 30,
-    paddingHorizontal: 30,
-    paddingVertical: 15,
-    marginBottom: 45,
+  start: {
+    //backgroundColor: "yellow",
+    height: 100,
+    width: 250,
+    marginBottom: 25,
   },
   login: {
     fontSize: 16,
