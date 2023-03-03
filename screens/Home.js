@@ -1,10 +1,10 @@
 import { StatusBar } from "expo-status-bar";
 import React, { useState } from "react";
 import { View, Text, TouchableOpacity, StyleSheet } from "react-native";
-import { AntDesign } from "@expo/vector-icons";
 import { Ionicons } from "@expo/vector-icons";
 import { FontAwesome } from "@expo/vector-icons";
 import { Entypo } from "@expo/vector-icons";
+import { Feather } from "@expo/vector-icons";
 
 export default function Home({ navigation }) {
   const [clothes, setClothes] = useState(["top", "Bottom", "Outer", "Acc"]);
@@ -18,80 +18,27 @@ export default function Home({ navigation }) {
           <Entypo name="home" size={35} color="white" />
         </TouchableOpacity>
 
-        <TouchableOpacity style={styles.notification}>
+        <TouchableOpacity style={styles.menuIcon}>
           <Ionicons name="notifications" size={35} color="white" />
         </TouchableOpacity>
 
         <TouchableOpacity
           onPress={() => navigation.navigate("Info")}
-          style={styles.user}
+          style={styles.menuIcon}
         >
           <FontAwesome name="user-circle-o" size={35} color="white" />
+        </TouchableOpacity>
+
+        <TouchableOpacity
+          onPress={() => navigation.navigate("Menu")}
+          style={styles.menuIcon}
+        >
+          <Feather name="menu" size={35} color="white" />
         </TouchableOpacity>
       </View>
 
       <View style={styles.body}>
-        <View style={styles.seasonContainer}>
-          <View style={styles.season}>
-            <Text style={styles.seasonText}>Spring</Text>
-
-            {clothes.map((value, key) => (
-              <TouchableOpacity
-                onPress={() => navigation.navigate("List")}
-                style={styles.clothes}
-                key={key}
-              >
-                <Text style={styles.clothesText}>{value}</Text>
-              </TouchableOpacity>
-            ))}
-          </View>
-
-          <View style={styles.season}>
-            <Text style={styles.seasonText}>Summer</Text>
-
-            {clothes.map((value, key) => (
-              <TouchableOpacity
-                onPress={() => navigation.navigate("List")}
-                style={styles.clothes}
-                key={key}
-              >
-                <Text style={styles.clothesText}>{value}</Text>
-              </TouchableOpacity>
-            ))}
-          </View>
-          <View style={styles.season}>
-            <Text style={styles.seasonText}>Fall</Text>
-
-            {clothes.map((value, key) => (
-              <TouchableOpacity
-                onPress={() => navigation.navigate("List")}
-                style={styles.clothes}
-                key={key}
-              >
-                <Text style={styles.clothesText}>{value}</Text>
-              </TouchableOpacity>
-            ))}
-          </View>
-
-          <View style={styles.season}>
-            <Text style={styles.seasonText}>Winter</Text>
-
-            {clothes.map((value, key) => (
-              <TouchableOpacity
-                onPress={() => navigation.navigate("List")}
-                style={styles.clothes}
-                key={key}
-              >
-                <Text style={styles.clothesText}>{value}</Text>
-              </TouchableOpacity>
-            ))}
-          </View>
-        </View>
-      </View>
-      <View style={styles.footer}>
-        <TouchableOpacity onPress={() => navigation.navigate("Add")}>
-          <AntDesign name="pluscircle" size={60} color="white" />
-        </TouchableOpacity>
+        <Text style={styles.bodyText}>온도 / 날씨</Text>
       </View>
     </View>
   );
@@ -110,7 +57,7 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     width: "100%",
     marginTop: 60,
-    paddingHorizontal: 15,
+    paddingHorizontal: 10,
   },
 
   home: {
@@ -118,11 +65,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 3,
   },
 
-  notification: {
-    paddingHorizontal: 3,
-  },
-
-  user: {
+  menuIcon: {
     paddingHorizontal: 3,
   },
 
@@ -131,38 +74,7 @@ const styles = StyleSheet.create({
     justifyContent: "center",
   },
 
-  seasonContainer: {
-    flexDirection: "row",
-    flexWrap: "wrap",
-    marginHorizontal: 15,
-  },
-
-  season: {
-    flexDirection: "column",
-    flexBasis: "50%",
-    flexWrap: "nowrap",
-    paddingVertical: 10,
-  },
-
-  seasonText: {
-    fontSize: 45,
-    fontWeight: "600",
+  bodyText: {
     color: "white",
-  },
-
-  clothes: {
-    marginVertical: 1,
-  },
-
-  clothesText: {
-    color: "white",
-    fontSize: 27,
-    fontWeight: "600",
-  },
-
-  footer: {
-    alignItems: "center",
-    marginTop: 20,
-    marginBottom: 35,
   },
 });
