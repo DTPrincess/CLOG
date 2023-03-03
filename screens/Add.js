@@ -7,10 +7,12 @@ import {
   ScrollView,
   TouchableOpacity,
   TextInput,
+  Image,
 } from "react-native";
 import BouncyCheckboxGroup, {
   ICheckboxButton,
 } from "react-native-bouncy-checkbox-group";
+import * as ImagePicker from "expo-image-picker";
 import BouncyCheckbox from "react-native-bouncy-checkbox";
 import { AntDesign } from "@expo/vector-icons";
 import { Ionicons } from "@expo/vector-icons";
@@ -26,6 +28,9 @@ export default function Add({ navigation }) {
     brand: "",
     price: 0,
   });
+
+  //추가할 옷 이미지
+  const [image, setImage] = useState(null);
 
   const checkboxStyles = {
     fillColor: "white",
@@ -83,6 +88,19 @@ export default function Add({ navigation }) {
     },
   ];
 
+  const pickImage = async () => {
+    let result = await ImagePicker.launchImageLibraryAsync({
+      mediaTypes: ImagePicker.MediaTypeOptions.All,
+      allowsEditing: true,
+      aspect: [4, 3],
+      quality: 1,
+    });
+
+    if (!result.canceled) {
+      setImage(result.assets[0].uri);
+    }
+  };
+
   return (
     <View style={styles.container}>
       <View style={styles.menuBar}>
@@ -111,11 +129,15 @@ export default function Add({ navigation }) {
 
       <ScrollView>
         <View style={styles.body}>
-          <View style={styles.image}>
-            <TouchableOpacity style={styles.addImage}>
-              <AntDesign name="pluscircle" size={60} color="black" />
-            </TouchableOpacity>
-          </View>
+          {image == null ? (
+            <View style={styles.image}>
+              <TouchableOpacity onPress={pickImage} style={styles.addImage}>
+                <AntDesign name="pluscircle" size={60} color="black" />
+              </TouchableOpacity>
+            </View>
+          ) : (
+            image && <Image source={{ uri: image }} style={styles.image} />
+          )}
 
           <View style={styles.content}>
             <View style={styles.category}>
