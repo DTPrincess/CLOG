@@ -20,17 +20,29 @@ import { FontAwesome } from "@expo/vector-icons";
 import { Entypo } from "@expo/vector-icons";
 
 export default function Add({ navigation }) {
-  //추가할 옷 데이터↓↓ (date, wear 추후에 구현 예정)
-  const [data, setData] = useState({
-    season: "",
-    category: "",
-    name: "",
-    brand: "",
-    price: 0,
-  });
+  //추가할 옷 데이터↓↓ (date 추후에 구현 예정)
+  const [season, setSeason] = useState("");
+  const [category, setCategory] = useState("");
+  const [name, setName] = useState("");
+  const [brand, setBrand] = useState("");
+  const [price, setPrice] = useState(0);
+  const [wear, setWear] = useState(0);
+  const [washed, setWashed] = useState(false);
 
   //추가할 옷 이미지
   const [image, setImage] = useState(null);
+
+  //데이터 잘 저장되나 확인하려고 임시로 alert 함수 넣음
+  const sendData = () =>
+    alert(`
+      season: ${season}
+      category: ${category}
+      name: ${name}
+      brand: ${brand}
+      price: ${price}
+      wear: ${wear}
+      washed: ${washed}
+    `);
 
   const checkboxStyles = {
     fillColor: "white",
@@ -142,24 +154,49 @@ export default function Add({ navigation }) {
           <View style={styles.content}>
             <View style={styles.category}>
               <Text style={styles.categoryText}>Season</Text>
-              <BouncyCheckboxGroup data={seasons} style={styles.checkbox} />
+              <BouncyCheckboxGroup
+                onChange={(ICheckboxButton) => {
+                  setSeason(ICheckboxButton.text)
+                }}
+                data={seasons}
+                style={styles.checkbox}
+              />
             </View>
             <View style={styles.category}>
               <Text style={styles.categoryText}>Category</Text>
-              <BouncyCheckboxGroup data={clothes} style={styles.checkbox} />
+              <BouncyCheckboxGroup
+                onChange={(ICheckboxButton) => {
+                  setCategory(ICheckboxButton.text)
+                }}
+                data={clothes}
+                style={styles.checkbox}
+              />
             </View>
 
             <View style={styles.category}>
               <Text style={styles.categoryText}>Name</Text>
-              <TextInput style={styles.textinput} />
+              <TextInput
+                onChangeText={setName}
+                value={name}
+                style={styles.textinput}
+              />
             </View>
             <View style={styles.category}>
               <Text style={styles.categoryText}>Brand</Text>
-              <TextInput style={styles.textinput} />
+              <TextInput
+                onChangeText={setBrand}
+                value={brand}
+                style={styles.textinput}
+              />
             </View>
             <View style={styles.category}>
               <Text style={styles.categoryText}>Price</Text>
-              <TextInput style={styles.textinput} />
+              <TextInput
+                keyboardType="number-pad"
+                onChangeText={setPrice}
+                value={price}
+                style={styles.textinput}
+              />
             </View>
             <View style={styles.category}>
               <Text style={styles.categoryText}>Date</Text>
@@ -167,12 +204,19 @@ export default function Add({ navigation }) {
             </View>
             <View style={styles.category}>
               <Text style={styles.categoryText}>Wear</Text>
-              <TextInput style={styles.textinput} />
+              <TextInput
+                keyboardType="number-pad"
+                onChangeText={setWear}
+                value={wear}
+                style={styles.textinput}
+              />
             </View>
             <View style={styles.category}>
-              <Text style={styles.categoryText}>Washed</Text>
+              <Text value={washed} style={styles.categoryText}>
+                Washed
+              </Text>
               <BouncyCheckbox
-                onPress={() => {}}
+                onPress={setWashed}
                 fillColor="white"
                 unfillColor="black"
                 style={{
@@ -194,7 +238,7 @@ export default function Add({ navigation }) {
           </View>
         </View>
 
-        <TouchableOpacity style={styles.plus}>
+        <TouchableOpacity onPress={sendData} style={styles.plus}>
           <Ionicons name="checkmark-circle" size={75} color="white" />
         </TouchableOpacity>
       </ScrollView>
