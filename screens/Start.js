@@ -1,14 +1,7 @@
 import { StatusBar } from "expo-status-bar";
 import React, { useState } from "react";
-import title from '../assets/title.png';
-import start from '../assets/start.png';
-import {
-  StyleSheet,
-  Text,
-  View,
-  Image,
-  TouchableOpacity,
-} from "react-native";
+import title from "../assets/title.png";
+import { StyleSheet, Text, View, Image, TouchableOpacity } from "react-native";
 
 export default function Start({ navigation }) {
   return (
@@ -21,8 +14,9 @@ export default function Start({ navigation }) {
 
       <TouchableOpacity
         onPress={() => navigation.navigate("Home")}
+        style={styles.footer}
       >
-        <Image style={styles.start} source={start} />
+        <Text style={styles.login}>로그인</Text>
       </TouchableOpacity>
     </View>
   );
@@ -52,6 +46,15 @@ const styles = StyleSheet.create({
     width: 250,
     marginBottom: 25,
   },
+
+  footer: {
+    backgroundColor: "white",
+    borderRadius: 30,
+    paddingHorizontal: 30,
+    paddingVertical: 15,
+    marginBottom: 45,
+  },
+
   login: {
     fontSize: 16,
     fontWeight: "500",
