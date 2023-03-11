@@ -36,8 +36,8 @@ const styles = StyleSheet.create({
   },
 
   title: {
-    height: 250,
-    width: 250,
+    height: 210,
+    width: 210,
   },
 
   start: {
