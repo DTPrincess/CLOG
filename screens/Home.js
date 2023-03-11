@@ -20,7 +20,7 @@ export default function Home({ navigation }) {
   const [temp_min, setTemp_min] = useState(""); // 최저 온도
   const [temp_max, setTemp_max] = useState(""); // 최고 온도
   const [ok, setOk] = useState(true); // 위치 정보 수집 허용 여부
-
+  // 추후 옷차림 아이콘 변경
   const recommendDress = (temp) => {
     if (temp < 5) {
       var icon = "🧣";
@@ -85,7 +85,7 @@ export default function Home({ navigation }) {
       `https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&exclude=alerts&appid=${API_KEY}&units=metric`
     );
     const json = await response.json();
-    
+
     setWeather(json.weather[0].main);
     setTemp(json.main.temp);
     setTemp_min(json.main.temp_min);
