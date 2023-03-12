@@ -7,7 +7,12 @@ import {
   ScrollView,
   TouchableOpacity,
   TextInput,
+  Image,
 } from "react-native";
+import BouncyCheckboxGroup, {
+  ICheckboxButton,
+} from "react-native-bouncy-checkbox-group";
+import * as ImagePicker from "expo-image-picker";
 import BouncyCheckbox from "react-native-bouncy-checkbox";
 import { AntDesign } from "@expo/vector-icons";
 import { Ionicons } from "@expo/vector-icons";
@@ -15,6 +20,99 @@ import { FontAwesome } from "@expo/vector-icons";
 import { Entypo } from "@expo/vector-icons";
 
 export default function Add({ navigation }) {
+  //추가할 옷 데이터↓↓ (date 추후에 구현 예정)
+  const [season, setSeason] = useState("");
+  const [category, setCategory] = useState("");
+  const [name, setName] = useState("");
+  const [brand, setBrand] = useState("");
+  const [price, setPrice] = useState(0);
+  const [wear, setWear] = useState(0);
+  const [washed, setWashed] = useState(false);
+
+  //추가할 옷 이미지
+  const [image, setImage] = useState(null);
+
+  //데이터 잘 저장되나 확인하려고 임시로 alert 함수 넣음
+  const sendData = () =>
+    alert(`
+      season: ${season}
+      category: ${category}
+      name: ${name}
+      brand: ${brand}
+      price: ${price}
+      wear: ${wear}
+      washed: ${washed}
+    `);
+
+  const checkboxStyles = {
+    fillColor: "white",
+    unfillColor: "black",
+    textStyle: {
+      textDecorationLine: "none",
+    },
+    width: "50%",
+    paddingBottom: 7,
+  };
+
+  const seasons = [
+    {
+      id: 0,
+      text: "Spring",
+      ...checkboxStyles,
+    },
+    {
+      id: 1,
+      text: "Summer",
+      ...checkboxStyles,
+    },
+    {
+      id: 2,
+      text: "Fall",
+      ...checkboxStyles,
+    },
+    {
+      id: 3,
+      text: "Winter",
+      ...checkboxStyles,
+    },
+  ];
+
+  const clothes = [
+    {
+      id: 0,
+      text: "Top",
+      ...checkboxStyles,
+    },
+    {
+      id: 1,
+      text: "Bottom",
+      ...checkboxStyles,
+    },
+    {
+      id: 2,
+      text: "Outer",
+      ...checkboxStyles,
+    },
+    {
+      id: 3,
+      text: "Acc",
+      ...checkboxStyles,
+    },
+  ];
+
+  const pickImage = async () => {
+    let result = await ImagePicker.launchImageLibraryAsync({
+      mediaTypes: ImagePicker.MediaTypeOptions.All,
+      allowsEditing: true,
+      aspect: [4, 3],
+      quality: 1,
+    });
+
+    if (!result.canceled) {
+      setImage(result.assets[0].uri);
+    }
+  };
+
   return (
     <View style={styles.container}>
       <View style={styles.menuBar}>
@@ -43,73 +141,62 @@ export default function Add({ navigation }) {
 
       <ScrollView>
         <View style={styles.body}>
-          <View style={styles.image}>
-            <TouchableOpacity style={styles.addImage}>
-              <AntDesign name="pluscircle" size={60} color="black" />
-            </TouchableOpacity>
-          </View>
+          {image == null ? (
+            <View style={styles.image}>
+              <TouchableOpacity onPress={pickImage} style={styles.addImage}>
+                <AntDesign name="pluscircle" size={60} color="black" />
+              </TouchableOpacity>
+            </View>
+          ) : (
+            image && <Image source={{ uri: image }} style={styles.image} />
+          )}
 
           <View style={styles.content}>
             <View style={styles.category}>
               <Text style={styles.categoryText}>Season</Text>
-              <BouncyCheckbox
-                onPress={() => {}}
-                fillColor="white"
-                unfillColor="black"
-                text="Spring"
-                textStyle={{
-                  textDecorationLine: "none",
+              <BouncyCheckboxGroup
+                onChange={(ICheckboxButton) => {
+                  setSeason(ICheckboxButton.text)
                 }}
-              />
-              <BouncyCheckbox
-                onPress={() => {}}
-                fillColor="white"
-                unfillColor="black"
-                text="Summer"
-                textStyle={{
-                  textDecorationLine: "none",
-                }}
-              />
-            </View>
-            <View style={styles.category}>
-              <Text style={styles.categoryText}> </Text>
-              <BouncyCheckbox
-                onPress={() => {}}
-                fillColor="white"
-                unfillColor="black"
-                text="Fall"
-                textStyle={{
-                  textDecorationLine: "none",
-                }}
-              />
-              <BouncyCheckbox
-                fillColor="white"
-                unfillColor="black"
-                text="Winter"
-                textStyle={{
-                  textDecorationLine: "none",
-                }}
+                data={seasons}
+                style={styles.checkbox}
               />
             </View>
             <View style={styles.category}>
               <Text style={styles.categoryText}>Category</Text>
-              <TextInput
-                placeholder={"추후 checkbox로 변경"}
-                style={styles.textinput}
+              <BouncyCheckboxGroup
+                onChange={(ICheckboxButton) => {
+                  setCategory(ICheckboxButton.text)
+                }}
+                data={clothes}
+                style={styles.checkbox}
               />
             </View>
 
             <View style={styles.category}>
               <Text style={styles.categoryText}>Name</Text>
-              <TextInput style={styles.textinput} />
+              <TextInput
+                onChangeText={setName}
+                value={name}
+                style={styles.textinput}
+              />
             </View>
             <View style={styles.category}>
               <Text style={styles.categoryText}>Brand</Text>
-              <TextInput style={styles.textinput} />
+              <TextInput
+                onChangeText={setBrand}
+                value={brand}
+                style={styles.textinput}
+              />
             </View>
             <View style={styles.category}>
               <Text style={styles.categoryText}>Price</Text>
-              <TextInput style={styles.textinput} />
+              <TextInput
+                keyboardType="number-pad"
+                onChangeText={setPrice}
+                value={price}
+                style={styles.textinput}
+              />
             </View>
             <View style={styles.category}>
               <Text style={styles.categoryText}>Date</Text>
@@ -117,20 +204,42 @@ export default function Add({ navigation }) {
             </View>
             <View style={styles.category}>
               <Text style={styles.categoryText}>Wear</Text>
-              <TextInput style={styles.textinput} />
+              <TextInput
+                keyboardType="number-pad"
+                onChangeText={setWear}
+                value={wear}
+                style={styles.textinput}
+              />
             </View>
             <View style={styles.category}>
-              <Text style={styles.categoryText}>Washed</Text>
-              <TextInput
-                placeholder={"추후 checkbox로 변경"}
-                style={styles.textinput}
+              <Text value={washed} style={styles.categoryText}>
+                Washed
+              </Text>
+              <BouncyCheckbox
+                onPress={setWashed}
+                fillColor="white"
+                unfillColor="black"
+                style={{
+                  width: "65%",
+                  marginLeft: 15,
+                }}
+                disableText
+                textStyle={{
+                  textDecorationLine: "none",
+                }}
+                innerIconStyle={{
+                  borderRadius: 0,
+                }}
+                iconStyle={{
+                  borderRadius: 0,
+                }}
               />
             </View>
           </View>
         </View>
 
-        <TouchableOpacity style={styles.plus}>
-          <AntDesign name="pluscircle" size={60} color="white" />
+        <TouchableOpacity onPress={sendData} style={styles.plus}>
+          <Ionicons name="checkmark-circle" size={75} color="white" />
         </TouchableOpacity>
       </ScrollView>
     </View>
@@ -203,7 +312,6 @@ const styles = StyleSheet.create({
   category: {
     flex: 1,
     justifyContent: "space-between",
-    alignItems: "baseline",
     flexDirection: "row",
     marginHorizontal: 10,
     marginTop: 10,
@@ -221,7 +329,7 @@ const styles = StyleSheet.create({
     fontSize: 16,
     borderBottomColor: "white",
     borderWidth: 2,
-    width: 220,
+    width: "65%",
     paddingBottom: 5,
     paddingHorizontal: 5,
   },
@@ -230,5 +338,10 @@ const styles = StyleSheet.create({
     alignItems: "center",
     marginTop: 20,
     marginBottom: 35,
+  },
+
+  checkbox: {
+    width: "65%",
+    flexWrap: "wrap",
   },
 });

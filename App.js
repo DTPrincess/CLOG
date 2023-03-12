@@ -7,6 +7,7 @@ import Start from "./screens/Start";
 import Home from "./screens/Home";
 import Add from "./screens/Add";
 import Info from "./screens/Info";
+import Menu from "./screens/Menu";
 
 export default function App() {
 
@@ -20,6 +21,7 @@ export default function App() {
         <Stack.Screen name='Home' component={Home} />
         <Stack.Screen name='Add' component={Add} />
         <Stack.Screen name='Info' component={Info} />
+        <Stack.Screen name='Menu' component={Menu} />
       </Stack.Navigator>
     </NavigationContainer>
   );

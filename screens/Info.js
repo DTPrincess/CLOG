@@ -129,7 +129,7 @@ const styles = StyleSheet.create({
   },
 
   infoInput: {
-    color: "pink",
+    color: "white",
     fontSize: 16,
     borderBottomColor: "white",
     borderWidth: 2,

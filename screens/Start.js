@@ -1,12 +1,7 @@
 import { StatusBar } from "expo-status-bar";
 import React, { useState } from "react";
-import {
-  StyleSheet,
-  Text,
-  View,
-  ScrollView,
-  TouchableOpacity,
-} from "react-native";
+import title from "../assets/title.png";
+import { StyleSheet, Text, View, Image, TouchableOpacity } from "react-native";
 
 export default function Start({ navigation }) {
   return (
@@ -14,15 +9,14 @@ export default function Start({ navigation }) {
       <StatusBar style="light" />
 
       <View style={styles.body}>
-        <Text style={styles.title}>CLOG</Text>
-        <Text style={styles.subtitle}>나만의 옷장 기록</Text>
+        <Image style={styles.title} source={title} />
       </View>
 
       <TouchableOpacity
         onPress={() => navigation.navigate("Home")}
         style={styles.footer}
       >
-        <Text style={styles.login}>게스트 로그인</Text>
+        <Text style={styles.login}>로그인</Text>
       </TouchableOpacity>
     </View>
   );
@@ -40,22 +34,27 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
   },
+
   title: {
-    color: "white",
-    fontSize: 48,
-    fontWeight: "600",
+    height: 210,
+    width: 210,
   },
-  subtitle: {
-    color: "white",
-    fontWeight: "500",
+
+  start: {
+    //backgroundColor: "yellow",
+    height: 100,
+    width: 250,
+    marginBottom: 25,
   },
+
   footer: {
     backgroundColor: "white",
     borderRadius: 30,
-    paddingHorizontal: 80,
+    paddingHorizontal: 30,
     paddingVertical: 15,
     marginBottom: 45,
   },
+
   login: {
     fontSize: 16,
     fontWeight: "500",

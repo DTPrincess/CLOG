@@ -4,7 +4,9 @@ import { View, Text, TouchableOpacity, StyleSheet } from "react-native";
 import { AntDesign } from "@expo/vector-icons";
 import { Ionicons } from "@expo/vector-icons";
 import { FontAwesome } from "@expo/vector-icons";
+
 import List from "List";
+
 
 export default function Home({ navigation }) {
   const [clothes, setClothes] = useState(["top", "Bottom", "Outer", "Acc"]);
@@ -154,4 +156,8 @@ const styles = StyleSheet.create({
     fontWeight: "600",
     paddingVertical: 1,
   },
+
 });
+
+});
+
