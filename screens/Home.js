@@ -74,10 +74,15 @@ export default function Home({ navigation }) {
     );
     setCity(location[0].city);
     // 날씨 api 가져오기
-    const response = await fetch(
+    const json = await fetch(
       `https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&exclude=alerts&appid=${API_KEY}&units=metric`
-    );
-    const json = await response.json();
+    )
+      .then((response) => {
+        return response.json();
+      })
+      .catch((e) => {
+        console.log(e);
+      });
 
     setWeather(json.weather[0].main);
     setTemp(json.main.temp);
