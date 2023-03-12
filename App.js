@@ -9,6 +9,7 @@ import Add from "./screens/Add";
 import Info from "./screens/Info";
 
 export default function App() {
+
   const Stack = createStackNavigator();
   
   return (
