@@ -2,30 +2,24 @@ import { StatusBar } from "expo-status-bar";
 import React, { useState } from "react";
 import { View, Text, TouchableOpacity, StyleSheet } from "react-native";
 import { AntDesign } from "@expo/vector-icons";
-import { Ionicons } from "@expo/vector-icons";
-import { FontAwesome } from "@expo/vector-icons";
-
-import List from "List";
-
 
 export default function Home({ navigation }) {
   const [clothes, setClothes] = useState(["top", "Bottom", "Outer", "Acc"]);
 
   const doIt = () => {
-    if(clothes[0]===""){
-    setClothes("Top");
+    if (clothes[0] === "") {
+      setClothes("Top");
     }
-    else if(clothes[1]==="Bottom"){
-    setClothes("Bottom");
+    else if (clothes[1] === "Bottom") {
+      setClothes("Bottom");
     }
-    else if(clothes[2]==="Outer"){
-    setClothes("Outer");
+    else if (clothes[2] === "Outer") {
+      setClothes("Outer");
     }
-    else{
-    setClothes("Acc");
+    else {
+      setClothes("Acc");
     }
   };
-
 
   return (
     <View style={styles.container}>
@@ -156,8 +150,4 @@ const styles = StyleSheet.create({
     fontWeight: "600",
     paddingVertical: 1,
   },
-
 });
-
-});
-
