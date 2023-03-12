@@ -21,6 +21,23 @@ export default function List({ navigation }) {
     //, "옷1", "옷2", "옷3", "옷4", "옷5", "옷6"
   ]);
 
+  
+  const doIt = () => {
+    if(clothes[0]==="top"){
+    setClothes("Top");
+    }
+    else if(clothes[1]==="Bottom"){
+    setClothes("Bottom");
+    }
+    else if(clothes[2]==="Outer"){
+    setClothes("Outer");
+    }
+    else{
+    setClothes("Acc");
+    }
+  };
+
+
   return (
     <View style={styles.container}>
       <StatusBar style="light" />
@@ -46,8 +63,8 @@ export default function List({ navigation }) {
       </View>
 
       <View style={styles.header}>
-        <Text style={styles.season}>Winter</Text>
-        <Text style={styles.category}>Top</Text>
+        <Text style={styles.season}>{doIt}</Text>
+        <Text style={styles.category}>{doIt}</Text>
       </View>
 
       <ScrollView>

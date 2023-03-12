@@ -10,8 +10,10 @@ import {
 } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 import { FontAwesome } from "@expo/vector-icons";
+
 import { Entypo } from "@expo/vector-icons";
 import { Feather } from "@expo/vector-icons";
+
 
 export default function Home({ navigation }) {
   const [city, setCity] = useState(""); // 현재 위치한 도시
@@ -101,6 +103,10 @@ export default function Home({ navigation }) {
       <StatusBar style="light" />
 
       <View style={styles.menuBar}>
+
+        <TouchableOpacity
+          onPress={() => navigation.navigate("Home")}
+
         <TouchableOpacity style={styles.home}>
           <Entypo name="home" size={35} color="white" />
         </TouchableOpacity>
@@ -111,9 +117,10 @@ export default function Home({ navigation }) {
 
         <TouchableOpacity
           onPress={() => navigation.navigate("Info")}
+
           style={styles.menuIcon}
         >
-          <FontAwesome name="user-circle-o" size={35} color="white" />
+          <AntDesign name="left" size={30} color="white" />
         </TouchableOpacity>
 
         <TouchableOpacity
@@ -146,7 +153,11 @@ export default function Home({ navigation }) {
             </View>
             {recommendDress(Math.round(temp))}
           </View>
+
+        </View>
+
         )}
+
       </View>
     </View>
   );
@@ -167,13 +178,15 @@ const styles = StyleSheet.create({
     paddingHorizontal: 10,
   },
 
-  home: {
+  menuIcon: {
     flex: 1,
+
     paddingHorizontal: 3,
   },
 
   menuIcon: {
     paddingHorizontal: 3,
+
   },
 
   body: {
@@ -182,10 +195,17 @@ const styles = StyleSheet.create({
     justifyContent: "center",
   },
 
+  seasonContainer: {
+    flexDirection: "row",
+    flexWrap: "wrap",
+    marginHorizontal: 15,
+    marginBottom: 40,
+
   weather: {
     alignItems: "center",
     justifyContent: "center",
     marginTop: 50,
+
   },
 
   cityText: {
@@ -216,6 +236,11 @@ const styles = StyleSheet.create({
     color: "white",
     fontSize: "14",
     fontWeight: "600",
+
+    paddingVertical: 1,
+  },
+});
+
     padding: 5,
   },
 
@@ -238,3 +263,4 @@ const styles = StyleSheet.create({
     padding: 5,
   },
 });
+
