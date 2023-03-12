@@ -10,10 +10,8 @@ import {
 } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 import { FontAwesome } from "@expo/vector-icons";
-
 import { Entypo } from "@expo/vector-icons";
 import { Feather } from "@expo/vector-icons";
-
 
 export default function Home({ navigation }) {
   const [city, setCity] = useState(""); // 현재 위치한 도시
@@ -27,32 +25,25 @@ export default function Home({ navigation }) {
     if (temp < 5) {
       var icon = "🧣";
       var text = "패딩과 두꺼운 코트, 목도리를 추천합니다 :D";
-    }
-    else if (5 <= temp && temp < 9) {
+    } else if (5 <= temp && temp < 9) {
       var icon = "🧣";
       var text = "코트, 히트텍, 두꺼운 니트를 추천합니다 :D";
-    }
-    else if (9 <= temp && temp < 12) {
+    } else if (9 <= temp && temp < 12) {
       var icon = "🧥";
       var text = "트렌치코트, 자켓, 니트를 추천합니다 :D";
-    }
-    else if (12 <= temp && temp < 17) {
+    } else if (12 <= temp && temp < 17) {
       var icon = "🧣";
       var text = "자켓, 가디건, 조끼를 추천합니다 :D";
-    }
-    else if (17 <= temp && temp < 20) {
+    } else if (17 <= temp && temp < 20) {
       var icon = "🧣";
       var text = "얇은 니트, 맨투맨, 후드티를 추천합니다 :D";
-    }
-    else if (20 <= temp && temp < 23) {
+    } else if (20 <= temp && temp < 23) {
       var icon = "🧣";
       var text = "셔츠, 긴팔티, 청바지를 추천합니다 :D";
-    }
-    else if (23 <= temp && temp < 28) {
+    } else if (23 <= temp && temp < 28) {
       var icon = "🧣";
       var text = "반팔티, 반바지, 얇은 셔츠를 추천합니다 :D";
-    }
-    else if (28 <= temp) {
+    } else if (28 <= temp) {
       var icon = "🧣";
       var text = "민소매, 반팔, 반바지를 추천합니다 :D";
     }
@@ -103,10 +94,6 @@ export default function Home({ navigation }) {
       <StatusBar style="light" />
 
       <View style={styles.menuBar}>
-
-        <TouchableOpacity
-          onPress={() => navigation.navigate("Home")}
-
         <TouchableOpacity style={styles.home}>
           <Entypo name="home" size={35} color="white" />
         </TouchableOpacity>
@@ -117,10 +104,9 @@ export default function Home({ navigation }) {
 
         <TouchableOpacity
           onPress={() => navigation.navigate("Info")}
-
           style={styles.menuIcon}
         >
-          <AntDesign name="left" size={30} color="white" />
+          <FontAwesome name="user-circle-o" size={35} color="white" />
         </TouchableOpacity>
 
         <TouchableOpacity
@@ -153,11 +139,7 @@ export default function Home({ navigation }) {
             </View>
             {recommendDress(Math.round(temp))}
           </View>
-
-        </View>
-
         )}
-
       </View>
     </View>
   );
@@ -178,15 +160,13 @@ const styles = StyleSheet.create({
     paddingHorizontal: 10,
   },
 
-  menuIcon: {
+  home: {
     flex: 1,
-
     paddingHorizontal: 3,
   },
 
   menuIcon: {
     paddingHorizontal: 3,
-
   },
 
   body: {
@@ -195,17 +175,10 @@ const styles = StyleSheet.create({
     justifyContent: "center",
   },
 
-  seasonContainer: {
-    flexDirection: "row",
-    flexWrap: "wrap",
-    marginHorizontal: 15,
-    marginBottom: 40,
-
   weather: {
     alignItems: "center",
     justifyContent: "center",
     marginTop: 50,
-
   },
 
   cityText: {
@@ -236,11 +209,6 @@ const styles = StyleSheet.create({
     color: "white",
     fontSize: "14",
     fontWeight: "600",
-
-    paddingVertical: 1,
-  },
-});
-
     padding: 5,
   },
 
@@ -263,4 +231,3 @@ const styles = StyleSheet.create({
     padding: 5,
   },
 });
-
