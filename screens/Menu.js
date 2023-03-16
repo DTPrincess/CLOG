@@ -4,22 +4,7 @@ import { View, Text, TouchableOpacity, StyleSheet } from "react-native";
 import { AntDesign } from "@expo/vector-icons";
 
 export default function Home({ navigation }) {
-  const [clothes, setClothes] = useState(["top", "Bottom", "Outer", "Acc"]);
-
-  const doIt = () => {
-    if (clothes[0] === "") {
-      setClothes("Top");
-    }
-    else if (clothes[1] === "Bottom") {
-      setClothes("Bottom");
-    }
-    else if (clothes[2] === "Outer") {
-      setClothes("Outer");
-    }
-    else {
-      setClothes("Acc");
-    }
-  };
+  const [clothes, setClothes] = useState(["Top", "Bottom", "Outer", "Acc"]);
 
   return (
     <View style={styles.container}>
@@ -41,7 +26,12 @@ export default function Home({ navigation }) {
 
             {clothes.map((value, key) => (
               <TouchableOpacity
-                onPress={() => navigation.navigate("List")}
+                onPress={() =>
+                  navigation.navigate("List", {
+                    season: "Spring",
+                    category: value,
+                  })
+                }
                 style={styles.clothes}
                 key={key}
               >
@@ -55,7 +45,12 @@ export default function Home({ navigation }) {
 
             {clothes.map((value, key) => (
               <TouchableOpacity
-                onPress={() => navigation.navigate("List")}
+                onPress={() =>
+                  navigation.navigate("List", {
+                    season: "Summer",
+                    category: value,
+                  })
+                }
                 style={styles.clothes}
                 key={key}
               >
@@ -68,7 +63,12 @@ export default function Home({ navigation }) {
 
             {clothes.map((value, key) => (
               <TouchableOpacity
-                onPress={() => navigation.navigate("List")}
+                onPress={() =>
+                  navigation.navigate("List", {
+                    season: "Fall",
+                    category: value,
+                  })
+                }
                 style={styles.clothes}
                 key={key}
               >
@@ -82,7 +82,12 @@ export default function Home({ navigation }) {
 
             {clothes.map((value, key) => (
               <TouchableOpacity
-                onPress={() => navigation.navigate("List")}
+                onPress={() =>
+                  navigation.navigate("List", {
+                    season: "Winter",
+                    category: value,
+                  })
+                }
                 style={styles.clothes}
                 key={key}
               >

@@ -12,7 +12,8 @@ import { Ionicons } from "@expo/vector-icons";
 import { FontAwesome } from "@expo/vector-icons";
 import { Entypo } from "@expo/vector-icons";
 
-export default function List({ navigation }) {
+
+export default function List({ navigation,route }) {
   const [clothes, setClothes] = useState([
     "니트 조끼",
     "배색 후드집업",
@@ -20,23 +21,6 @@ export default function List({ navigation }) {
     "아가일 가디건",
     //, "옷1", "옷2", "옷3", "옷4", "옷5", "옷6"
   ]);
-
-  
-  const doIt = () => {
-    if(clothes[0]==="top"){
-    setClothes("Top");
-    }
-    else if(clothes[1]==="Bottom"){
-    setClothes("Bottom");
-    }
-    else if(clothes[2]==="Outer"){
-    setClothes("Outer");
-    }
-    else{
-    setClothes("Acc");
-    }
-  };
-
 
   return (
     <View style={styles.container}>
@@ -63,8 +47,8 @@ export default function List({ navigation }) {
       </View>
 
       <View style={styles.header}>
-        <Text style={styles.season}>{doIt}</Text>
-        <Text style={styles.category}>{doIt}</Text>
+        <Text style={styles.season}>{route.params.season}</Text>
+        <Text style={styles.category}>{route.params.category}</Text>
       </View>
 
       <ScrollView>
