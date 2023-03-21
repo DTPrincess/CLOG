@@ -1,5 +1,5 @@
 import { StatusBar } from "expo-status-bar";
-import React, { useState } from "react";
+import React, { useEffect, useState, setState } from "react";
 import {
   StyleSheet,
   Text,
@@ -18,6 +18,9 @@ import { AntDesign } from "@expo/vector-icons";
 import { Ionicons } from "@expo/vector-icons";
 import { FontAwesome } from "@expo/vector-icons";
 import { Entypo } from "@expo/vector-icons";
+import AsyncStorage from '@react-native-async-storage/async-storage';
+
+const STORAGE_KEY = "@Closet";
 
 export default function Add({ navigation }) {
   //추가할 옷 데이터↓↓ (date 추후에 구현 예정)
@@ -32,17 +35,41 @@ export default function Add({ navigation }) {
   //추가할 옷 이미지
   const [image, setImage] = useState(null);
 
+  const [closet, setCloset] = useState({});
+
+  const saveClothes = async (toSave) => {
+    await AsyncStorage.setItem(STORAGE_KEY, JSON.stringify(toSave));
+  };
+
+  const loadClothes = async (season) => {
+    const s = await AsyncStorage.getItem(STORAGE_KEY)
+    console.log(s)
+    s = null ? null : setCloset(JSON.parse(s));
+  }
+
+  useEffect(() => {
+    loadClothes();
+  }, []);
+
   //데이터 잘 저장되나 확인하려고 임시로 alert 함수 넣음
-  const sendData = () =>
-    alert(`
-      season: ${season}
-      category: ${category}
-      name: ${name}
-      brand: ${brand}
-      price: ${price}
-      wear: ${wear}
-      washed: ${washed}
-    `);
+  const sendData = async (toSave) => {
+    const newClothes = {
+      ...closet,
+      [Date.now()]: {
+        season,
+        category,
+        name,
+        brand,
+        price,
+        wear,
+        washed,
+      }
+    }
+    setCloset(newClothes);
+    saveClothes(newClothes);
+    alert('저장 완료!');
+    navigation.navigate("Menu");
+  }
 
   const checkboxStyles = {
     fillColor: "white",
