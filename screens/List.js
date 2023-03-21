@@ -12,15 +12,40 @@ import { Ionicons } from "@expo/vector-icons";
 import { FontAwesome } from "@expo/vector-icons";
 import { Entypo } from "@expo/vector-icons";
 
+const STORAGE_KEY = "@Closet";
 
-export default function List({ navigation,route }) {
-  const [clothes, setClothes] = useState([
-    "니트 조끼",
-    "배색 후드집업",
-    "앙고라 털 니트",
-    "아가일 가디건",
-    //, "옷1", "옷2", "옷3", "옷4", "옷5", "옷6"
-  ]);
+export default function List({ navigation, route }) {
+  const [closet, setCloset] = useState({});
+
+  useEffect(() => {
+    loadClothes();
+  }, []);
+
+  const loadClothes = async () => {
+    const s = await AsyncStorage.getItem(STORAGE_KEY);
+    console.log(s);
+    s !== null ? setCloset(JSON.parse(s)) : null;
+  };
+
+  const saveClothes = async (toSave) => {
+    await AsyncStorage.setItem(STORAGE_KEY, JSON.stringify(toSave));
+  };
+
+  const deleteClothes = (key) => {
+    Alert.alert("Delete", "정말 삭제하시겠습니까?", [
+      { text: "아니옹..." },
+      {
+        text: "네!",
+        style: "destructive",
+        onPress: () => {
+          const newClothes = { ...closet };
+          delete newClothes[key];
+          setCloset(newClothes);
+          saveClothes(newClothes);
+        },
+      },
+    ]);
+  };
 
   return (
     <View style={styles.container}>
@@ -52,11 +77,17 @@ export default function List({ navigation,route }) {
       </View>
 
       <ScrollView>
-        {clothes.map((value, key) => (
-          <TouchableOpacity style={styles.content} key={key}>
-            <Text style={styles.clothes}>{value}</Text>
-          </TouchableOpacity>
-        ))}
+        {Object.keys(closet).map((key) =>
+          closet[key].season === route.params.season &&
+          closet[key].category === route.params.category ? (
+            <TouchableOpacity style={styles.content} key={key}>
+              <Text style={styles.clothes}>{closet[key].name}</Text>
+              <TouchableOpacity onPress={() => deleteClothes(key)}>
+                <FontAwesome name="trash" size={18} color="lightgray" />
+              </TouchableOpacity>
+            </TouchableOpacity>
+          ) : null
+        )}
       </ScrollView>
 
       <TouchableOpacity

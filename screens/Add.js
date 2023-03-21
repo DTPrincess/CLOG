@@ -18,7 +18,7 @@ import { AntDesign } from "@expo/vector-icons";
 import { Ionicons } from "@expo/vector-icons";
 import { FontAwesome } from "@expo/vector-icons";
 import { Entypo } from "@expo/vector-icons";
-import AsyncStorage from '@react-native-async-storage/async-storage';
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 const STORAGE_KEY = "@Closet";
 
@@ -42,17 +42,21 @@ export default function Add({ navigation }) {
   };
 
   const loadClothes = async (season) => {
-    const s = await AsyncStorage.getItem(STORAGE_KEY)
-    console.log(s)
+    const s = await AsyncStorage.getItem(STORAGE_KEY);
+    console.log(s);
     s = null ? null : setCloset(JSON.parse(s));
-  }
+  };
 
   useEffect(() => {
     loadClothes();
   }, []);
 
-  //데이터 잘 저장되나 확인하려고 임시로 alert 함수 넣음
   const sendData = async (toSave) => {
+    //계절, 카테고리, 이름 필수로 입력하도록 함↓↓
+    if (season === "") return alert("계절을 선택해주세요!");
+    else if (category === "") return alert("카테고리를 선택해주세요!");
+    else if (name === "") return alert("이름을 입력해주세요!");
+
     const newClothes = {
       ...closet,
       [Date.now()]: {
@@ -63,13 +67,13 @@ export default function Add({ navigation }) {
         price,
         wear,
         washed,
-      }
-    }
+      },
+    };
     setCloset(newClothes);
-    saveClothes(newClothes);
-    alert('저장 완료!');
+    await saveClothes(newClothes);
+    alert("저장 완료!");
     navigation.navigate("Menu");
-  }
+  };
 
   const checkboxStyles = {
     fillColor: "white",
@@ -183,7 +187,7 @@ export default function Add({ navigation }) {
               <Text style={styles.categoryText}>Season</Text>
               <BouncyCheckboxGroup
                 onChange={(ICheckboxButton) => {
-                  setSeason(ICheckboxButton.text)
+                  setSeason(ICheckboxButton.text);
                 }}
                 data={seasons}
                 style={styles.checkbox}
@@ -193,7 +197,7 @@ export default function Add({ navigation }) {
               <Text style={styles.categoryText}>Category</Text>
               <BouncyCheckboxGroup
                 onChange={(ICheckboxButton) => {
-                  setCategory(ICheckboxButton.text)
+                  setCategory(ICheckboxButton.text);
                 }}
                 data={clothes}
                 style={styles.checkbox}
