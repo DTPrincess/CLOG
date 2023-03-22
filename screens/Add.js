@@ -37,6 +37,10 @@ export default function Add({ navigation }) {
 
   const [closet, setCloset] = useState({});
 
+  useEffect(() => {
+    loadClothes();
+  }, []);
+
   const saveClothes = async (toSave) => {
     await AsyncStorage.setItem(STORAGE_KEY, JSON.stringify(toSave));
   };
@@ -44,12 +48,8 @@ export default function Add({ navigation }) {
   const loadClothes = async (season) => {
     const s = await AsyncStorage.getItem(STORAGE_KEY);
     console.log(s);
-    s = null ? null : setCloset(JSON.parse(s));
+    s == null ? null : setCloset(JSON.parse(s));
   };
-
-  useEffect(() => {
-    loadClothes();
-  }, []);
 
   const sendData = async (toSave) => {
     //계절, 카테고리, 이름 필수로 입력하도록 함↓↓
@@ -71,6 +71,7 @@ export default function Add({ navigation }) {
     };
     setCloset(newClothes);
     await saveClothes(newClothes);
+    
     alert("저장 완료!");
     navigation.navigate("Menu");
   };
