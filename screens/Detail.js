@@ -21,8 +21,8 @@ import { Entypo } from "@expo/vector-icons";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
 const STORAGE_KEY = "@Closet";
-
-export default function Add({ navigation }) {
+//수정 불가 (추후에 수정 기능 추가)
+export default function Detail({ navigation, route }) {
   const [season, setSeason] = useState("");
   const [category, setCategory] = useState("");
   const [name, setName] = useState("");
@@ -40,14 +40,31 @@ export default function Add({ navigation }) {
     loadClothes();
   }, []);
 
-  const saveClothes = async (toSave) => {
-    await AsyncStorage.setItem(STORAGE_KEY, JSON.stringify(toSave));
-  };
+  useEffect(() => {
+    if (closet) {
+      loadClickedClothes();
+    }
+  }, [closet]);
 
   const loadClothes = async () => {
     const s = await AsyncStorage.getItem(STORAGE_KEY);
     console.log(`1번 ${s}`);
     s !== null ? setCloset(JSON.parse(s)) : null;
+  };
+
+  const loadClickedClothes = () => {
+    setSeason(closet[route.params.key].season);
+    setCategory(closet[route.params.key].category);
+    setName(closet[route.params.key].name);
+    setBrand(closet[route.params.key].brand);
+    setPrice(closet[route.params.key].price);
+    setWear(closet[route.params.key].wear);
+    setWashed(closet[route.params.key].washed);
+    setImage(closet[route.params.key].image);
+  };
+
+  const saveClothes = async (toSave) => {
+    await AsyncStorage.setItem(STORAGE_KEY, JSON.stringify(toSave));
   };
 
   const sendData = async (toSave) => {
@@ -74,6 +91,17 @@ export default function Add({ navigation }) {
 
     alert("저장 완료!");
     navigation.navigate("Menu");
+  };
+
+  const findCheckboxId = (text) => {
+    if (text == "Spring" || text == "Top")
+      return 0
+    else if (text == "Summer" || text == "Bottom")
+      return 1
+    else if (text == "Fall" || text == "Outer")
+      return 2
+    else if (text == "Winter" || text == "Acc")
+      return 3
   };
 
   const checkboxStyles = {
@@ -168,7 +196,7 @@ export default function Add({ navigation }) {
       </View>
 
       <View style={styles.header}>
-        <Text style={styles.add}>Add</Text>
+        <Text style={styles.add}>{name}</Text>
       </View>
 
       <ScrollView>
@@ -191,6 +219,7 @@ export default function Add({ navigation }) {
                   setSeason(ICheckboxButton.text);
                 }}
                 data={seasons}
+                initial={findCheckboxId(season)}
                 style={styles.checkbox}
               />
             </View>
@@ -201,6 +230,7 @@ export default function Add({ navigation }) {
                   setCategory(ICheckboxButton.text);
                 }}
                 data={clothes}
+                initial={findCheckboxId(category)}
                 style={styles.checkbox}
               />
             </View>
@@ -247,8 +277,10 @@ export default function Add({ navigation }) {
               <Text value={washed} style={styles.categoryText}>
                 Washed
               </Text>
+              {/*washed state가 변경되어도 BouncyCheckbox가 리렌더링되지 않아 항상 false로 보여짐. 추후에 해결 필요함.*/}
               <BouncyCheckbox
                 onPress={setWashed}
+                isChecked={washed}
                 fillColor="white"
                 unfillColor="black"
                 style={{
@@ -269,10 +301,7 @@ export default function Add({ navigation }) {
             </View>
           </View>
         </View>
-
-        <TouchableOpacity onPress={sendData} style={styles.plus}>
-          <Ionicons name="checkmark-circle" size={75} color="white" />
-        </TouchableOpacity>
+        
       </ScrollView>
     </View>
   );
@@ -311,6 +340,7 @@ const styles = StyleSheet.create({
   },
 
   add: {
+    marginTop: 3,
     fontSize: 48,
     fontWeight: "600",
     color: "white",

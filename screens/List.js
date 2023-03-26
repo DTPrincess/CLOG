@@ -82,7 +82,15 @@ export default function List({ navigation, route }) {
         {Object.keys(closet).map((key) =>
           closet[key].season === route.params.season &&
           closet[key].category === route.params.category ? (
-            <TouchableOpacity style={styles.content} key={key}>
+            <TouchableOpacity
+              onPress={() =>
+                navigation.navigate("Detail", {
+                  key: key,
+                })
+              }
+              style={styles.content}
+              key={key}
+            >
               <Text style={styles.clothes}>{closet[key].name}</Text>
               <TouchableOpacity onPress={() => deleteClothes(key)}>
                 <FontAwesome name="trash" size={18} color="lightgray" />
