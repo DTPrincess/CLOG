@@ -20,6 +20,16 @@ export default function Home({ navigation }) {
       </View>
 
       <View style={styles.body}>
+        <TouchableOpacity
+          onPress={() =>
+            navigation.navigate("List", {
+              season: "All",
+            })
+          }
+          style={styles.All}
+        >
+          <Text style={styles.seasonText}>All</Text>
+        </TouchableOpacity>
         <View style={styles.seasonContainer}>
           <View style={styles.season}>
             <Text style={styles.seasonText}>Spring</Text>
@@ -123,6 +133,11 @@ const styles = StyleSheet.create({
   body: {
     flex: 1,
     justifyContent: "center",
+  },
+
+  All: {
+    alignSelf: "center",
+    //marginHorizontal: 15,
   },
 
   seasonContainer: {

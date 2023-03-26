@@ -73,15 +73,38 @@ export default function List({ navigation, route }) {
         </TouchableOpacity>
       </View>
 
-      <View style={styles.header}>
-        <Text style={styles.season}>{route.params.season}</Text>
-        <Text style={styles.category}>{route.params.category}</Text>
-      </View>
+      {route.params.season === "All" ? (
+        <View style={styles.header}>
+          <Text style={styles.season}>All</Text>
+        </View>
+      ) : (
+        <View style={styles.header}>
+          <Text style={styles.season}>{route.params.season}</Text>
+          <Text style={styles.category}>{route.params.category}</Text>
+        </View>
+      )}
 
       <ScrollView>
         {Object.keys(closet).map((key) =>
-          closet[key].season === route.params.season &&
-          closet[key].category === route.params.category ? (
+          route.params.season !== "All" ? (
+            closet[key].season === route.params.season &&
+            closet[key].category === route.params.category ? (
+              <TouchableOpacity
+                onPress={() =>
+                  navigation.navigate("Detail", {
+                    key: key,
+                  })
+                }
+                style={styles.content}
+                key={key}
+              >
+                <Text style={styles.clothes}>{closet[key].name}</Text>
+                <TouchableOpacity onPress={() => deleteClothes(key)}>
+                  <FontAwesome name="trash" size={18} color="lightgray" />
+                </TouchableOpacity>
+              </TouchableOpacity>
+            ) : null
+          ) : (
             <TouchableOpacity
               onPress={() =>
                 navigation.navigate("Detail", {
@@ -96,7 +119,7 @@ export default function List({ navigation, route }) {
                 <FontAwesome name="trash" size={18} color="lightgray" />
               </TouchableOpacity>
             </TouchableOpacity>
-          ) : null
+          )
         )}
       </ScrollView>
 
