@@ -1,13 +1,39 @@
 import { StatusBar } from "expo-status-bar";
 import React, { useState } from "react";
-import { View, Text, TouchableOpacity, StyleSheet } from "react-native";
+import {
+  View,
+  Text,
+  TouchableOpacity,
+  StyleSheet,
+  TextInput,
+  Image,
+} from "react-native";
 import { AntDesign } from "@expo/vector-icons";
 import { Ionicons } from "@expo/vector-icons";
 import { FontAwesome } from "@expo/vector-icons";
 import { Entypo } from "@expo/vector-icons";
-import { TextInput } from "react-native-gesture-handler";
+import * as ImagePicker from "expo-image-picker";
+
+const STORAGE_KEY = "@User";
 
 export default function Info({ navigation }) {
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [image, setImage] = useState(null);
+
+  const pickImage = async () => {
+    let result = await ImagePicker.launchImageLibraryAsync({
+      mediaTypes: ImagePicker.MediaTypeOptions.All,
+      allowsEditing: true,
+      aspect: [4, 3],
+      quality: 1,
+    });
+
+    if (!result.canceled) {
+      setImage(result.assets[0].uri);
+    }
+  };
+
   return (
     <View style={styles.container}>
       <StatusBar style="light" />
@@ -37,11 +63,16 @@ export default function Info({ navigation }) {
       </View>
 
       <View style={styles.body}>
-        <View style={styles.pic}>
-          <TouchableOpacity>
-            <AntDesign name="picture" size={40} color="gray" />
-          </TouchableOpacity>
-        </View>
+        {image == null ? (
+          <View style={styles.pic}>
+            <TouchableOpacity onPress={pickImage}>
+              <AntDesign name="picture" size={40} color="gray" />
+            </TouchableOpacity>
+          </View>
+        ) : (
+          image && <Image source={{ uri: image }} style={styles.pic} />
+        )}
+
         <View style={styles.info}>
           <Text style={styles.infoText}>Name</Text>
           <TextInput style={styles.infoInput} />
