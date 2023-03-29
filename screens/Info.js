@@ -1,5 +1,5 @@
 import { StatusBar } from "expo-status-bar";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   View,
   Text,
@@ -8,10 +8,11 @@ import {
   TextInput,
   Image,
 } from "react-native";
-import { AntDesign } from "@expo/vector-icons";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 import { Ionicons } from "@expo/vector-icons";
 import { FontAwesome } from "@expo/vector-icons";
 import { Entypo } from "@expo/vector-icons";
+import { Feather } from "@expo/vector-icons";
 import * as ImagePicker from "expo-image-picker";
 
 const STORAGE_KEY = "@User";
@@ -20,6 +21,46 @@ export default function Info({ navigation }) {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [image, setImage] = useState(null);
+  // 유저의 이름, 이메일, 이미지를 json 형태로 담는 state
+  const [user, setUser] = useState(null);
+
+  useEffect(() => {
+    loadUser();
+  }, []);
+
+  useEffect(() => {
+    if (user) {
+      setName(user.name);
+      setEmail(user.email);
+      setImage(user.image);
+    }
+  }, [user]);
+
+  useEffect(() => {
+    sendData();
+  }, [image, name, email]);
+
+  const loadUser = async () => {
+    const s = await AsyncStorage.getItem(STORAGE_KEY);
+    s !== null ? setUser(JSON.parse(s)) : null;
+    console.log(user);
+  };
+
+  const saveUser = async (toSave) => {
+    await AsyncStorage.setItem(STORAGE_KEY, JSON.stringify(toSave));
+  };
+
+  const sendData = async () => {
+    const newUser = {
+      name,
+      email,
+      image,
+    };
+    console.log(newUser);
+    setUser(newUser);
+    await saveUser(newUser);
+    //alert(`name: ${name}, email: ${email}, image: ${image}`);
+  };
 
   const pickImage = async () => {
     let result = await ImagePicker.launchImageLibraryAsync({
@@ -31,6 +72,12 @@ export default function Info({ navigation }) {
 
     if (!result.canceled) {
       setImage(result.assets[0].uri);
+    }
+  };
+
+  const deleteImage = async () => {
+    if (image) {
+      setImage(null);
     }
   };
 
@@ -66,18 +113,33 @@ export default function Info({ navigation }) {
         {image == null ? (
           <View style={styles.pic}>
             <TouchableOpacity onPress={pickImage}>
-              <AntDesign name="picture" size={40} color="gray" />
+              <Feather name="camera" size={18} color="black" />
             </TouchableOpacity>
           </View>
         ) : (
-          image && <Image source={{ uri: image }} style={styles.pic} />
+          <View>
+            {image && <Image source={{ uri: image }} style={styles.pic} />}
+            <TouchableOpacity onPress={deleteImage} style={styles.edit}>
+              <Feather name="camera" size={18} color="white" />
+            </TouchableOpacity>
+          </View>
         )}
 
         <View style={styles.info}>
           <Text style={styles.infoText}>Name</Text>
-          <TextInput style={styles.infoInput} />
+          <TextInput
+            onChangeText={setName}
+            onEndEditing={sendData}
+            value={name}
+            style={styles.infoInput}
+          />
           <Text style={styles.infoText}>E-mail</Text>
-          <TextInput style={styles.infoInput} />
+          <TextInput
+            onChangeText={setEmail}
+            onEndEditing={sendData}
+            value={email}
+            style={styles.infoInput}
+          />
         </View>
       </View>
 
@@ -140,10 +202,21 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     backgroundColor: "white",
-    borderRadius: 20,
+    borderRadius: 25,
     height: 160,
     width: 160,
     marginLeft: 20,
+  },
+
+  edit: {
+    backgroundColor: "black",
+    borderColor: "white",
+    borderWidth: 1,
+    position: "absolute",
+    borderRadius: 20,
+    padding: 6,
+    top: "82%",
+    left: "85%",
   },
 
   info: {

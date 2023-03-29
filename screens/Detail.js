@@ -67,7 +67,7 @@ export default function Detail({ navigation, route }) {
     await AsyncStorage.setItem(STORAGE_KEY, JSON.stringify(toSave));
   };
 
-  const sendData = async (toSave) => {
+  const sendData = async () => {
     //계절, 카테고리, 이름 필수로 입력하도록 함↓↓
     if (season === "") return alert("계절을 선택해주세요!");
     else if (category === "") return alert("카테고리를 선택해주세요!");
