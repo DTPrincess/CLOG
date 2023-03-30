@@ -148,7 +148,9 @@ export default function Info({ navigation }) {
       <View style={styles.footer}>
         <Text style={styles.footerText}>My ♥</Text>
         <Text style={styles.footerText}>내 게시물</Text>
-        <Text style={styles.footerText}>코디</Text>
+        <TouchableOpacity onPress={() => navigation.navigate("Outfit")}>
+          <Text style={styles.footerText}>코디</Text>
+        </TouchableOpacity>
       </View>
     </View>
   );

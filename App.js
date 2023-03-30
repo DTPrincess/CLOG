@@ -9,6 +9,7 @@ import Add from "./screens/Add";
 import Info from "./screens/Info";
 import Menu from "./screens/Menu";
 import Detail from "./screens/Detail";
+import Outfit from "./screens/Outfit";
 
 export default function App() {
 
@@ -24,6 +25,7 @@ export default function App() {
         <Stack.Screen name='Info' component={Info} />
         <Stack.Screen name='Menu' component={Menu} />
         <Stack.Screen name='Detail' component={Detail} />
+        <Stack.Screen name='Outfit' component={Outfit} />
       </Stack.Navigator>
     </NavigationContainer>
   );
